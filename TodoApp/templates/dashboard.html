@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Todo App</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1>My Todo Dashboard</h1>
+            <div class="user-controls">
+                <span id="userName"></span>
+                <button id="logoutBtn" class="btn btn-logout">Logout</button>
+            </div>
+        </header>
+
+        <div class="dashboard-actions">
+            <a href="/create" class="btn btn-primary">Create New Todo</a>
+        </div>
+
+        <div class="todo-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+
+        <div class="todos-container" id="todosContainer">
+            {% for todo in todos %}
+            <div class="todo-item" data-id="{{ todo.id }}" data-completed="{{ todo.completed }}">
+                <div class="todo-content">
+                    <h3 class="todo-title">{{ todo.title }}</h3>
+                    <p class="todo-desc">{{ todo.desc }}</p>
+                    <div class="todo-meta">
+                        <span class="todo-priority">Priority: {{ todo.priority }}</span>
+                        <span class="todo-status">
+                            Status: {% if todo.completed %}Completed{% else %}Active{% endif %}
+                        </span>
+                    </div>
+                </div>
+                <div class="todo-actions">
+                    <a href="/edit/{{ todo.id }}" class="btn btn-edit">Edit</a>
+                    <button class="btn btn-delete" data-id="{{ todo.id }}">Delete</button>
+                    <button class="btn btn-toggle-status" data-id="{{ todo.id }}" data-completed="{{ todo.completed }}">
+                        {% if todo.completed %}Mark Incomplete{% else %}Mark Complete{% endif %}
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
