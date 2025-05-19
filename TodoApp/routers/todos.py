@@ -75,3 +75,23 @@ async def delete_todo(
     db.commit()
     return None
 
+
+
+
+# # without SQLALCHEMY
+# @app.get("/todos")
+# def read_todos():
+#     conn = get_db_connection()
+#     cur = conn.cursor(cursor_factory=RealDictCursor)
+#     cur.execute("SELECT id, title, completed FROM todos;")
+#     todos = cur.fetchall()
+#     cur.close()
+#     conn.close()
+#     return todos
+#
+#
+# # With SQLALCHEMY
+# @app.get("/todos")
+# def read_todos(db: Session = Depends(get_db)):
+#     todos = db.query(Todo).all()
+#     return todos

@@ -11,6 +11,7 @@ class User(Base):
     name=Column(String,nullable=False)
     email=Column(String,unique=True)
     password=Column(String,nullable=False)
+    phonenumber=Column(String,nullable=False)
 
     todos=relationship("Todo",back_populates="owner")
 
